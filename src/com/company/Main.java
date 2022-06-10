@@ -2,44 +2,42 @@ package com.company;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 
 public class Main {
     static int[] numbers;
-    static ArrayList<Integer> list = new ArrayList<>();
+    static Integer [] numeberIntegers;
 
     public static void main(String[] args) {
         Main main = new Main();
-        numbers = new int[]{3, 30, 601, 621 , 0 ,300, 301, 34, 5, 9};
-        for (int i : numbers) {
-            list.add(i);
+        numbers = new int[]{10, 50, 100};
+
+        numeberIntegers  = new Integer[numbers.length];
+        for (int i = 0; i < numbers.length; i++) {
+            numeberIntegers[i] = numbers[i];
         }
-        System.out.println(main.solution());
+        main.solution();
     }
 
-    public String solution() {
-        String answer = "";
-        ArrayList<String> strNumbers = new ArrayList();
-        // int 형을 String 으로 변환한다.
-        for(Integer num : numbers){
-            strNumbers.add(String.valueOf(num));
-        }
+    public int solution() {
+        int answer = 0;
 
-        // 문장의 숫자를 뒷 배열 + 앞 배열을 합친 것과 앞 배열 + 뒷 배열을 합친값을 비교
-        Collections.sort(strNumbers, new Comparator<String>() {
-            @Override
-            public int compare(String o1, String o2) {
-                int temp = (o2+o1).compareTo(o1+o2);
-                return temp;
+        Arrays.sort(numeberIntegers, Collections.reverseOrder());
 
+        for (int i = 0; i < numeberIntegers.length; i++) {
+            System.out.println(numeberIntegers[i] +"/" + (i+1));
+            if (numeberIntegers[i] <= i) {
+                answer = i;
+                break;
             }
-        });
-
-        if(strNumbers.get(0).startsWith("0")) return "0";
-        for (String s : strNumbers) {
-            answer+=s;
+            if (numeberIntegers.length-1 == i) {
+                System.out.println(i);
+                answer = i+1;
+            }
         }
+
         return answer;
 
     }
